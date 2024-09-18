@@ -32,13 +32,23 @@ const LoginForm = () => {
   };
 
   return (
-    <FormProvider {...formMethods}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        <FormFieldWrapper control={control} name="email" label="Email" type="email" placeholder="Enter your email" />
-        <FormFieldWrapper control={control} name="password" label="Password" type="password" placeholder="Enter your password" />
-        <Button type="submit">Login</Button>
-      </form>
-    </FormProvider>
+    <section className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+      <FormProvider {...formMethods}>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
+          <FormFieldWrapper control={control} name="email" label="Email" type="email" placeholder="Enter your email" />
+          <FormFieldWrapper
+            control={control}
+            name="password"
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+          />
+          <Button className={'bg-green-500'} type="submit">
+            Login
+          </Button>
+        </form>
+      </FormProvider>
+    </section>
   );
 };
 
