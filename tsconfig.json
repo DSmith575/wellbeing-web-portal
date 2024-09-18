@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6", // Set the ECMAScript target version
+    "module": "commonjs", // Set the module system
+    "jsx": "react-jsx", // Enable JSX support (for React 17+)
+    "strict": true, // Enable strict type-checking options
+    "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
