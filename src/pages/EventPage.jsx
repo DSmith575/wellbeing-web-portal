@@ -17,10 +17,13 @@ const EventPage = () => {
                 <li key={event.id}>
                   <li className="font-bold">Event Name: {event.eventName}</li>
                   <li>Event Type:{event.eventType}</li>
-                  <li>Group Limit: {event.groupLimit}</li>
-                  <li>
-                    Number of Signups: {event.signedUp.length} / {event.groupLimit}
-                  </li>
+                  {event.groupLimit > 0 && <li>Group Limit: {event.groupLimit}</li>}
+                  {event.signedUp.length > 0 && (
+                    <li>
+                      Number of Signups: {event.signedUp.length} /{' '}
+                      {event.groupLimit}
+                    </li>
+                  )}
                   <li>{useQrCode(event.id)}</li>
                 </li>
               )
