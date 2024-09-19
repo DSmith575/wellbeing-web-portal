@@ -15,7 +15,7 @@ const schema = z.object({
 });
 
 const CreateEvent = () => {
-  const [qrCodeValue, setQrCodeValue] = useState('');
+  const [qrCodeValue, setQrCodeValue] = useState(null);
 
   const formMethods = useForm({
     resolver: zodResolver(schema),
@@ -46,6 +46,11 @@ const CreateEvent = () => {
         signedUp: [],
       });
 
+      if (!eventDoc.id) {
+        console.error('Event ID not found');
+        return;
+      }
+
       const generatedQrCode = eventDoc.id;
       await setDoc(
         doc(db, 'events', eventDoc.id),
@@ -53,13 +58,17 @@ const CreateEvent = () => {
         { merge: true },
       );
 
+      if (!eventDoc.id) {
+        console.error('Event ID not found');
+        return;
+      }
+
       setQrCodeValue(
         JSON.stringify({
           eventId: eventDoc.id,
-          eventName: eventDoc.eventName,
+          eventName: data.eventName,
           // eventDate: eventDate,
-          groupLimit: eventDoc.groupLimit,
-          qrCodeValue: generatedQrCode,
+          groupLimit: data.groupLimit,
         }),
       );
 
