@@ -4,6 +4,7 @@ import { z } from 'zod';
 import FormFieldWrapper from './FormFieldWrapper';
 import { useUserAuth } from '../../context/FirestoreAuthContext';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
   email: z.string().email({
@@ -16,6 +17,7 @@ const schema = z.object({
 
 const LoginForm = () => {
   const { login } = useUserAuth();
+  const navigate = useNavigate();
 
   const formMethods = useForm({
     resolver: zodResolver(schema),
@@ -29,6 +31,7 @@ const LoginForm = () => {
 
   const onSubmit = (data) => {
     login(data.email, data.password);
+    navigate('/dashboard');
   };
 
   return (
