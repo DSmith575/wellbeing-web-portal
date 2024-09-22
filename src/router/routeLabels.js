@@ -4,3 +4,10 @@ export const routerLabels = {
   events: 'Events',
   dashboard: 'Dashboard',
 };
+
+export const routerPaths = {
+  home: '/',
+  login: '/login',
+  events: '/events',
+  dashboard: '/dashboard',
+};

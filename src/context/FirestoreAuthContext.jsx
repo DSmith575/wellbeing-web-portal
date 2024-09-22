@@ -1,5 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { signOut, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import {
+  signOut,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 
 const FirestoreAuthContext = createContext();
@@ -25,7 +29,11 @@ const FirestoreAuthProvider = ({ children }) => {
     });
   }, []);
 
-  return <FirestoreAuthContext.Provider value={{ user, login, logout }}>{children}</FirestoreAuthContext.Provider>;
+  return (
+    <FirestoreAuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </FirestoreAuthContext.Provider>
+  );
 };
 
 export { FirestoreAuthProvider, useUserAuth };

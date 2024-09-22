@@ -2,6 +2,7 @@ import CreateEvent from '../components/qrCode/CreateEvent';
 import { useUserAuth } from '../context/FirestoreAuthContext';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { routerPaths } from '../router/routeLabels';
 
 const DashboardPage = () => {
   const { logout } = useUserAuth();
@@ -9,7 +10,7 @@ const DashboardPage = () => {
 
   const handleClick = () => {
     logout();
-    navigate('/');
+    navigate(routerPaths.home);
   };
   return (
     <>

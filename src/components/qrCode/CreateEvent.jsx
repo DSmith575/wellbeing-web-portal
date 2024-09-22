@@ -9,8 +9,10 @@ import QRCode from 'react-qr-code';
 
 const schema = z.object({
   eventName: z.string().min(1, 'Event name is required'),
-  // eventDate: z.date(),
-  groupLimit: z.coerce.number().optional(),
+  groupLimit: z.coerce
+    .number()
+    .positive('Number must be empty or greater than zero.')
+    .optional(),
   eventType: z.string().optional(),
 });
 
@@ -21,7 +23,6 @@ const CreateEvent = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       eventName: '',
-      // eventDate: '',
       groupLimit: '',
       eventType: '',
     },
@@ -40,7 +41,6 @@ const CreateEvent = () => {
     try {
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
-        // eventDate: data.eventDate,
         eventType: data.eventType,
         ...(data.groupLimit && { groupLimit: data.groupLimit }),
         signedUp: [],
@@ -67,7 +67,6 @@ const CreateEvent = () => {
         JSON.stringify({
           eventId: eventDoc.id,
           eventName: data.eventName,
-          // eventDate: eventDate,
           groupLimit: data.groupLimit,
         }),
       );
@@ -97,13 +96,6 @@ const CreateEvent = () => {
               label="Event Type"
               placeholder="Enter event type"
             />
-            {/* <FormFieldWrapper
-            control={control}
-            name="eventDate"
-            label="Event Date"
-            type="datetime-local"
-            placeholder="Enter event date"
-          /> */}
             <FormFieldWrapper
               control={control}
               name="groupLimit"
@@ -112,7 +104,7 @@ const CreateEvent = () => {
               placeholder="Enter group limit (Optional)"
             />
             <Button
-              className={'mt-2 flex justify-center items-center'}
+              className={'mt-2 flex justify-center items-center bg-green-500'}
               type="submit">
               Create Event
             </Button>

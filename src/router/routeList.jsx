@@ -2,26 +2,26 @@ import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
 import EventPage from '../pages/EventPage';
 import DashboardPage from '../pages/DashboardPage';
-import { routerLabels } from './routeLabels';
+import { routerLabels, routerPaths } from './routeLabels';
 
 export const routes = [
   {
-    path: '/',
+    path: routerPaths.home,
     label: routerLabels.home,
     element: <HomePage />,
   },
   {
-    path: '/login',
+    path: routerPaths.login,
     label: routerLabels.login,
     element: <LoginPage />,
   },
   {
-    path: '/events',
+    path: routerPaths.events,
     label: routerLabels.events,
     element: <EventPage />,
   },
   {
-    path: '/dashboard',
+    path: routerPaths.dashboard,
     label: routerLabels.dashboard,
     element: <DashboardPage />,
   },
