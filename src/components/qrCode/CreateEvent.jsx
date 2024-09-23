@@ -9,9 +9,13 @@ import QRCode from 'react-qr-code';
 
 const schema = z.object({
   eventName: z.string().min(1, 'Event name is required'),
-  groupLimit: z.coerce
-    .number()
-    .positive('Number must be empty or greater than zero.')
+  groupLimit: z
+    .union([
+      z.coerce.number().positive('Number must be greater than zero.'),
+      z.literal(undefined),
+      z.literal(null),
+      z.literal(''),
+    ])
     .optional(),
   eventType: z.string().optional(),
 });

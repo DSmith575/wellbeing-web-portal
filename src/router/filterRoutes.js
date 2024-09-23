@@ -2,7 +2,7 @@ import { routerLabels } from './routeLabels';
 
 const ignoredRoutesAuthenticated = [routerLabels.login];
 
-const ignoredRoutesUnauthenticated = [routerLabels.dashboard];
+const ignoredRoutesUnauthenticated = [routerLabels.dashboard, routerLabels.events];
 
 export const filterRoutes = (routes, user) => {
   const ignoredRoutes = user

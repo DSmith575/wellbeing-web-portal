@@ -1,13 +1,12 @@
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { collection, query, onSnapshot } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 
 export const getEventList = async ({ collectionName, callback }) => {
   try {
-    const gameRef = collection(firestore, collectionName);
-    const gamesQuery = query(gameRef);
-    console.log(gamesQuery);
+    const eventRef = collection(firestore, collectionName);
+    const eventQuery = query(eventRef);
 
-    return onSnapshot(gamesQuery, callback);
+    return onSnapshot(eventQuery, callback);
   } catch (error) {
     return error;
   }
