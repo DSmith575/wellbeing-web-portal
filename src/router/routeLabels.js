@@ -7,7 +7,6 @@ export const routerLabels = {
 
 export const routerPaths = {
   home: '/',
-  login: '/login',
   events: '/events',
   dashboard: '/dashboard',
 };

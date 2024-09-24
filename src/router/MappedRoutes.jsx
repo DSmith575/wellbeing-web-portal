@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useUserAuth } from '../context/FirestoreAuthContext';
 import { filterRoutes } from './filterRoutes';
 import { routes } from './routeList';
+import Logout from '../components/forms/Logout';
 
 const MappedRoutes = () => {
   const { user } = useUserAuth();
@@ -27,6 +28,12 @@ const MappedRoutes = () => {
           {route.label}
         </NavLink>
       ))}
+      {user && (
+        <Logout
+          styles={navigationMenuTriggerStyle('text-red-600 hover:bg-red-100')}
+          children={'Logout'}
+        />
+      )}
     </>
   );
 };

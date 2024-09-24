@@ -1,4 +1,4 @@
-import { collection, query, onSnapshot } from 'firebase/firestore';
+import { collection, query, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
 import { firestore } from '../../firebase/firebase';
 
 export const getEventList = async ({ collectionName, callback }) => {
@@ -9,5 +9,15 @@ export const getEventList = async ({ collectionName, callback }) => {
     return onSnapshot(eventQuery, callback);
   } catch (error) {
     return error;
+  }
+};
+
+export const deleteEvent = async (eventId) => {
+  try {
+    await deleteDoc(doc(firestore, 'events', eventId));
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting document: ', error);
+    return { success: false, error };
   }
 };

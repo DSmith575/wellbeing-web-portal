@@ -1,38 +1,35 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
-import { z } from 'zod';
+import { FormProvider } from 'react-hook-form';
 import FormFieldWrapper from './FormFieldWrapper';
 import { useUserAuth } from '../../context/FirestoreAuthContext';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { routerPaths } from '../../router/routeLabels';
-
-const schema = z.object({
-  email: z.string().email({
-    message: 'Please enter a valid email',
-  }),
-  password: z.string().min(6, {
-    message: 'Password must be at least 6 characters long',
-  }),
-});
+import useLoading from '../hooks/useLoading';
+import Spinner from '../spinner/Spinner';
+import { useState } from 'react';
+import useLoginForm from '../hooks/useLoginForm';
 
 const LoginForm = () => {
   const { login } = useUserAuth();
   const navigate = useNavigate();
-
-  const formMethods = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
+  const { loading, setLoading } = useLoading();
+  const [error, setError] = useState(null);
+  const formMethods = useLoginForm();
 
   const { handleSubmit, control } = formMethods;
 
-  const onSubmit = (data) => {
-    login(data.email, data.password);
-    navigate(routerPaths.dashboard);
+  const onSubmit = async (data) => {
+    try {
+      setLoading('login', true);
+      setError(null);
+      await login(data.email, data.password);
+      navigate(routerPaths.dashboard);
+    } catch (error) {
+      console.error(error);
+      setError(error.message);
+    } finally {
+      setLoading('login', false);
+    }
   };
 
   return (
@@ -45,6 +42,7 @@ const LoginForm = () => {
             label="Email"
             type="email"
             placeholder="Enter your email"
+            autoComplete="email"
           />
           <FormFieldWrapper
             control={control}
@@ -52,12 +50,16 @@ const LoginForm = () => {
             label="Password"
             type="password"
             placeholder="Enter your password"
+            autoComplete="current-password"
           />
-          <Button className={'bg-green-500'} type="submit">
-            Login
+          <Button
+            className={`bg-green-500 ${loading('login') ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            type="submit">
+            {loading('login') ? <Spinner /> : 'Login'}
           </Button>
         </form>
       </FormProvider>
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
     </section>
   );
 };

@@ -20,7 +20,11 @@ const FirestoreAuthProvider = ({ children }) => {
   };
 
   const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    try {
+      return signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      throw new Error('Incorrect email or password');
+    }
   };
 
   useEffect(() => {

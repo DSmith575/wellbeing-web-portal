@@ -1,38 +1,18 @@
 import { useState } from 'react';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FormProvider } from 'react-hook-form';
+import { collection, addDoc } from 'firebase/firestore';
+import { FormProvider } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import FormFieldWrapper from '../forms/FormFieldWrapper';
 import QrCode from '../qrCode/QrCode';
 import useLoading from '../hooks/useLoading';
-import { ImSpinner3 } from 'react-icons/im';
-
-const schema = z.object({
-  eventName: z.string().min(1, 'Event name is required'),
-  groupLimit: z
-    .union([
-      z.coerce.number().positive('Number must be greater than zero.'),
-      z.literal(undefined),
-      z.literal(null),
-      z.literal(''),
-    ])
-    .optional(),
-  eventType: z.string().optional(),
-});
+import { firestore } from '../../firebase/firebase';
+import Spinner from '../spinner/Spinner';
+import useCreateEventForm from '../hooks/useCreateEventForm';
 
 const CreateEvent = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
   const { loading, setLoading } = useLoading();
-  const formMethods = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      eventName: '',
-      groupLimit: '',
-      eventType: '',
-    },
-  });
+  const formMethods = useCreateEventForm();
 
   const { handleSubmit, control, reset } = formMethods;
 
@@ -42,11 +22,10 @@ const CreateEvent = () => {
   };
 
   const createEvent = async (data) => {
-    const db = getFirestore();
-    const eventRef = collection(db, 'events');
+    const eventRef = collection(firestore, 'events');
     try {
+      setQrCodeValue(null);
       setLoading('createEvent', true);
-      await new Promise((resolve) => setTimeout(resolve, 10000));
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
         eventType: data.eventType,
@@ -96,13 +75,9 @@ const CreateEvent = () => {
               placeholder="Enter group limit (Optional)"
             />
             <Button
-              className={'mt-2 flex justify-center items-center bg-green-500'}
+              className={`mt-2 flex justify-center items-center bg-green-500 ${loading('createEvent') ? 'cursor-not-allowed' : 'cursor-pointer'}`}
               type="submit">
-              {loading('createEvent') ? (
-                <ImSpinner3 className={'animate-spin h-6 w-6'} />
-              ) : (
-                'Create Event'
-              )}
+              {loading('createEvent') ? <Spinner /> : 'Create Event'}
             </Button>
           </form>
         </FormProvider>
