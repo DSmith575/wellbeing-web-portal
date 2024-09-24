@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { getFirestore, doc, setDoc, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import FormFieldWrapper from '../forms/FormFieldWrapper';
-import QRCode from 'react-qr-code';
+import QrCode from '../qrCode/QrCode';
+import useLoading from '../hooks/useLoading';
+import { ImSpinner3 } from 'react-icons/im';
 
 const schema = z.object({
   eventName: z.string().min(1, 'Event name is required'),
@@ -22,7 +24,7 @@ const schema = z.object({
 
 const CreateEvent = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
-
+  const { loading, setLoading } = useLoading();
   const formMethods = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -43,6 +45,8 @@ const CreateEvent = () => {
     const db = getFirestore();
     const eventRef = collection(db, 'events');
     try {
+      setLoading('createEvent', true);
+      await new Promise((resolve) => setTimeout(resolve, 10000));
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
         eventType: data.eventType,
@@ -55,29 +59,13 @@ const CreateEvent = () => {
         return;
       }
 
-      const generatedQrCode = eventDoc.id;
-      await setDoc(
-        doc(db, 'events', eventDoc.id),
-        { qrCodeValue: generatedQrCode },
-        { merge: true },
-      );
-
-      if (!eventDoc.id) {
-        console.error('Event ID not found');
-        return;
-      }
-
-      setQrCodeValue(
-        JSON.stringify({
-          eventId: eventDoc.id,
-          eventName: data.eventName,
-          groupLimit: data.groupLimit,
-        }),
-      );
+      setQrCodeValue(eventDoc.id);
 
       console.log('Event created successfully');
     } catch (error) {
       console.error('Error creating event:', error);
+    } finally {
+      setLoading('createEvent', false);
     }
   };
 
@@ -110,15 +98,21 @@ const CreateEvent = () => {
             <Button
               className={'mt-2 flex justify-center items-center bg-green-500'}
               type="submit">
-              Create Event
+              {loading('createEvent') ? (
+                <ImSpinner3 className={'animate-spin h-6 w-6'} />
+              ) : (
+                'Create Event'
+              )}
             </Button>
           </form>
         </FormProvider>
       </section>
       {qrCodeValue && (
-        <section className={'flex flex-col justify-center items-center mt-4'}>
-          <h3>Scan this QR code:</h3>
-          <QRCode title={'test'} value={qrCodeValue} size={256} />
+        <section
+          className={
+            'max-w-md mx-auto flex flex-col justify-center items-center mt-4 border rounded-lg shadow-md p-4 bg-slate-100 transition-transform transform hover:scale-105'
+          }>
+          <QrCode qrCodeValue={qrCodeValue} size={256} />
         </section>
       )}
     </>

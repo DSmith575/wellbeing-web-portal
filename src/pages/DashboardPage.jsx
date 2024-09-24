@@ -1,8 +1,8 @@
-import CreateEvent from '../components/qrCode/CreateEvent';
-import { useUserAuth } from '../context/FirestoreAuthContext';
+import { useUserAuth } from '@/context/FirestoreAuthContext';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { routerPaths } from '../router/routeLabels';
+import { routerPaths } from '@/router/routeLabels';
+import CreateEvent from '@/components/events/CreateEvent';
 
 const DashboardPage = () => {
   const { logout } = useUserAuth();

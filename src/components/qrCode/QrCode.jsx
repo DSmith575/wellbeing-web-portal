@@ -1,6 +1,6 @@
 import QRCode from 'react-qr-code';
 
-const useQrCode = (qrCodeValue) => {
+const QrCode = ({ qrCodeValue }) => {
   return (
     <a onClick={() => console.log(qrCodeValue)}>
       <QRCode value={qrCodeValue} size={256} />
@@ -8,4 +8,4 @@ const useQrCode = (qrCodeValue) => {
   );
 };
 
-export default useQrCode;
+export default QrCode;
