@@ -6,7 +6,11 @@ const QrCode = ({ qrCodeValue }) => {
   return (
     <>
       <div ref={svgRef}>
-        <QRCode value={qrCodeValue.id || qrCodeValue} size={256} />
+        <QRCode
+          className="rounded-lg shadow-md"
+          value={qrCodeValue.id || qrCodeValue}
+          size={256}
+        />
       </div>
       <button
         className={
