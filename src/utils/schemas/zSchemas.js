@@ -9,7 +9,7 @@ export const loginSchema = z.object({
   }),
 });
 
-export const eventSchema = z.object({
+export const createEventSchema = z.object({
   eventName: z.string().min(1, 'Event name is required'),
   groupLimit: z
     .union([

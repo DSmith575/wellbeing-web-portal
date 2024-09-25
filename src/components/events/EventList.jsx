@@ -9,7 +9,6 @@ const EventList = () => {
   const handleDeleteEvent = async (eventId) => {
     try {
       setLoading(`deleteEvent-${eventId}`, true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       await deleteEvent(eventId);
     } catch (error) {
       console.error(error);
