@@ -43,7 +43,6 @@ const CreateEvent = () => {
         eventName: data.eventName,
         eventType: data.eventType,
       });
-      console.log(qrCodeValue);
       console.log('Event created successfully');
     } catch (error) {
       console.error('Error creating event:', error);
