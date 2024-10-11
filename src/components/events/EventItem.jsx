@@ -3,6 +3,7 @@ import Button from '../../buttons/Button';
 import Spinner from '../spinner/Spinner';
 
 const EventItem = ({ event, onDelete, isLoading }) => {
+  console.log(event);
   return (
     <li className="border rounded-lg shadow-md p-4 bg-slate-100 transition-transform transform">
       <section className="flex flex-row justify-between items-start">
@@ -30,6 +31,27 @@ const EventItem = ({ event, onDelete, isLoading }) => {
         <p className="text-gray-700 mb-2">
           <span className="font-bold">Number of Sign-ups: </span>{' '}
           {event.signedUp.length} / {event.groupLimit || 'No Limit'}
+        </p>
+      )}
+
+      {event.eventDate && (
+        <p className="text-gray-700 mb-0.5">
+          <span className="font-bold">Event Date: </span>
+          {event.eventDate.toDate().toLocaleString()}
+        </p>
+      )}
+
+      {event.eventCategory && (
+        <p className="text-gray-700 mb-0.5">
+          <span className="font-bold">Event Category: </span>
+          {event.eventCategory}
+        </p>
+      )}
+
+      {event.eventRecurrence && (
+        <p className="text-gray-700 mb-0.5">
+          <span className="font-bold">Event Recurrence: </span>
+          {event.eventRecurrence}
         </p>
       )}
 

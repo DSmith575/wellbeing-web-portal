@@ -19,5 +19,8 @@ export const createEventSchema = z.object({
       z.literal(''),
     ])
     .optional(),
+  eventDate: z.preprocess((value) => (value ? new Date(value) : null), z.date()),
   eventType: z.string().optional(),
+  eventCategory: z.string(),
+  eventRecurrence: z.string(),
 });

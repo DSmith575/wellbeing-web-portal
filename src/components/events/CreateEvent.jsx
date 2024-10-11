@@ -8,6 +8,7 @@ import useLoading from '../hooks/useLoading';
 import { firestore } from '../../firebase/firebase';
 import Spinner from '../spinner/Spinner';
 import useCreateEventForm from '../hooks/useCreateEventForm';
+import { eventCategories, eventRecurrence } from '../../utils/constants/constants';
 
 const CreateEvent = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
@@ -28,7 +29,9 @@ const CreateEvent = () => {
       setLoading('createEvent', true);
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
-        eventType: data.eventType,
+        eventDate: data.eventDate,
+        eventCategory: data.eventCategory,
+        eventRecurrence: data.eventRecurrence,
         ...(data.groupLimit && { groupLimit: data.groupLimit }),
         signedUp: [],
       });
@@ -41,8 +44,9 @@ const CreateEvent = () => {
       setQrCodeValue({
         id: eventDoc.id,
         eventName: data.eventName,
-        eventType: data.eventType,
+        eventCategory: data.eventCategory,
       });
+
       console.log('Event created successfully');
     } catch (error) {
       console.error('Error creating event:', error);
@@ -64,12 +68,31 @@ const CreateEvent = () => {
               label="Event Name"
               placeholder="Enter event name"
             />
+
             <FormFieldWrapper
               control={control}
-              name="eventType"
-              label="Event Type"
-              placeholder="Enter event type"
+              name="eventDate"
+              label="Event Date"
+              type="datetime-local"
+              placeholder="Enter event date"
             />
+
+            <FormFieldWrapper
+              control={control}
+              name="eventCategory"
+              label="Event Category"
+              type="select"
+              options={eventCategories}
+            />
+
+            <FormFieldWrapper
+              control={control}
+              name="eventRecurrence"
+              label="Event Recurrence"
+              type="select"
+              options={eventRecurrence}
+            />
+
             <FormFieldWrapper
               control={control}
               name="groupLimit"

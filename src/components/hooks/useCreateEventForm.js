@@ -8,7 +8,10 @@ const useCreateEventForm = () => {
     defaultValues: {
       eventName: '',
       groupLimit: '',
+      eventDate: '',
       eventType: '',
+      eventCategory: '',
+      eventRecurrence: '',
     },
   });
   return formMethods;
