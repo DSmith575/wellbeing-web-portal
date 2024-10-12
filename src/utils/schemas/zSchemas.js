@@ -20,7 +20,6 @@ export const createEventSchema = z.object({
     ])
     .optional(),
   eventDate: z.preprocess((value) => (value ? new Date(value) : null), z.date()),
-  eventType: z.string().optional(),
-  eventCategory: z.string(),
-  eventRecurrence: z.string(),
+  eventCategory: z.string().min(1, 'Event category is required'),
+  eventRecurrence: z.string().min(1, 'Event recurrence is required'),
 });

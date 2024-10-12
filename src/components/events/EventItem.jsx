@@ -14,10 +14,6 @@ const EventItem = ({ event, onDelete, isLoading }) => {
           {isLoading ? <Spinner /> : <span>Delete</span>}
         </Button>
       </section>
-      <p className="mt-4 text-gray-700 mb-0.5">
-        <span className="font-bold">Event Type: </span>
-        {event.eventType}
-      </p>
 
       {!event.groupLimit ? (
         <p className="text-gray-700 mb-0.5 font-bold">No Group Limit</p>
@@ -43,14 +39,14 @@ const EventItem = ({ event, onDelete, isLoading }) => {
 
       {event.eventCategory && (
         <p className="text-gray-700 mb-0.5">
-          <span className="font-bold">Event Category: </span>
+          <span className="font-bold">Category: </span>
           {event.eventCategory}
         </p>
       )}
 
       {event.eventRecurrence && (
         <p className="text-gray-700 mb-0.5">
-          <span className="font-bold">Event Recurrence: </span>
+          <span className="font-bold">Recurrence: </span>
           {event.eventRecurrence}
         </p>
       )}
