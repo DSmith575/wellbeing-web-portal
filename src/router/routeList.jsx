@@ -1,7 +1,7 @@
-import LoginPage from '../pages/LoginPage';
-import EventPage from '../pages/EventPage';
-import DashboardPage from '../pages/DashboardPage';
-import { routerLabels, routerPaths } from './routeLabels';
+import LoginPage from "../pages/LoginPage";
+import EventPage from "../pages/EventPage";
+import EventPlanner from "../pages/EventPlanner";
+import { routerLabels, routerPaths } from "./routeLabels";
 
 export const routes = [
   {
@@ -15,8 +15,8 @@ export const routes = [
     element: <EventPage />,
   },
   {
-    path: routerPaths.dashboard,
-    label: routerLabels.dashboard,
-    element: <DashboardPage />,
+    path: routerPaths.eventPlanner,
+    label: routerLabels.eventPlanner,
+    element: <EventPlanner />,
   },
 ];
