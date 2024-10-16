@@ -3,5 +3,5 @@ export const getCurrentDate = () => {
 };
 
 export const convertEventDate = (eventDate) => {
-  return eventDate.toDate().toLocaleString();
+  return eventDate.toDate().toLocaleString("en-NZ");
 };
