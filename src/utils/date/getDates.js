@@ -1,7 +1,7 @@
 export const getCurrentDate = () => {
-  return new Date().toLocaleString();
+  return new Date();
 };
 
-export const convertEventDate = (eventDate) => {
+export const convertEventDateToLocale = (eventDate) => {
   return eventDate.toDate().toLocaleString("en-NZ");
 };

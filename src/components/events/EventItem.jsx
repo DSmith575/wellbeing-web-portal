@@ -2,15 +2,18 @@ import QrCode from "../qrCode/QrCode";
 import Button from "../../buttons/Button";
 import Spinner from "../spinner/Spinner";
 import { dateComparison } from "../../utils/date/dateComparison";
-import { convertEventDate, getCurrentDate } from "../../utils/date/getDates";
+import {
+  convertEventDateToLocale,
+  getCurrentDate,
+} from "../../utils/date/getDates";
 
 const EventItem = ({ event, onDelete, isLoading }) => {
   const today = getCurrentDate();
-  const eventDate = convertEventDate(event.eventDate);
+  const eventDate = convertEventDateToLocale(event.eventDate);
 
   return (
     <li
-      className={`border w- rounded-lg shadow-md p-4 ${dateComparison(today, eventDate) ? "bg-blue-100" : "bg-slate-100"}`}>
+      className={`border w- rounded-lg shadow-md p-4 ${dateComparison(today, event.eventDate.toDate()) ? "bg-blue-100" : "bg-slate-100"}`}>
       <section className="flex flex-row justify-between items-start">
         <h2 className="font-bold text-xl">{event.eventName}</h2>
         <Button
@@ -56,7 +59,7 @@ const EventItem = ({ event, onDelete, isLoading }) => {
         </p>
       )}
 
-      {dateComparison(today, eventDate) && (
+      {dateComparison(today, event.eventDate.toDate()) && (
         <p className="text-red-500 font-bold">Event has ended</p>
       )}
 
