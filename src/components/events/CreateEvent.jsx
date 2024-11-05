@@ -10,6 +10,7 @@ import QrCode from "../qrCode/QrCode";
 import useLoading from "../hooks/useLoading";
 import Spinner from "../spinner/Spinner";
 import useCreateEventForm from "../hooks/useCreateEventForm";
+import { createEventOptions } from "../../utils/forms/createEventOptions";
 
 const CreateEvent = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
@@ -31,9 +32,11 @@ const CreateEvent = () => {
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
         eventDate: data.eventDate,
+        eventLocation: data.eventLocation,
         eventCategory: data.eventCategory,
         eventRecurrence: data.eventRecurrence,
         ...(data.groupLimit && { groupLimit: data.groupLimit }),
+        colorPicker: data.colorPicker,
         signedUp: [],
       });
 
@@ -63,44 +66,18 @@ const CreateEvent = () => {
           <form
             className={"space-y-4 flex flex-col"}
             onSubmit={handleSubmit(onSubmit)}>
-            <FormFieldWrapper
-              control={control}
-              name="eventName"
-              label="Event Name"
-              placeholder="Enter event name"
-            />
+            {createEventOptions.map((option) => (
+              <FormFieldWrapper
+                key={option.name}
+                control={control}
+                name={option.name}
+                label={option.label}
+                type={option.type}
+                placeholder={option.placeholder}
+                options={option.options}
+              />
+            ))}
 
-            <FormFieldWrapper
-              control={control}
-              name="eventDate"
-              label="Event Date"
-              type="datetime-local"
-              placeholder="Enter event date"
-            />
-
-            <FormFieldWrapper
-              control={control}
-              name="eventCategory"
-              label="Event Category"
-              type="select"
-              options={eventCategories}
-            />
-
-            <FormFieldWrapper
-              control={control}
-              name="eventRecurrence"
-              label="Event Recurrence"
-              type="select"
-              options={eventRecurrence}
-            />
-
-            <FormFieldWrapper
-              control={control}
-              name="groupLimit"
-              label="Group Size"
-              type="number"
-              placeholder="Enter group limit (Optional)"
-            />
             <Button
               className={`mt-2 flex justify-center items-center bg-green-500 ${loading("createEvent") ? "cursor-not-allowed" : "cursor-pointer"}`}
               type="submit">
