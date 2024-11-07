@@ -36,10 +36,4 @@ export const createEventOptions = [
     type: "number",
     placeholder: "Enter group limit (Optional)",
   },
-  {
-    name: "colorPicker",
-    label: "Color Picker",
-    type: "color",
-    placeholder: "Enter color",
-  },
 ];

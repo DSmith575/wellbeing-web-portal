@@ -2,7 +2,6 @@ import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { eventCategories, eventRecurrence } from "../../utils/constants/constants";
 import { firestore } from "../../firebase/firebase";
 import { eventCollection } from "../../utils/constants/constants";
 import FormFieldWrapper from "../forms/FormFieldWrapper";
@@ -11,6 +10,7 @@ import useLoading from "../hooks/useLoading";
 import Spinner from "../spinner/Spinner";
 import useCreateEventForm from "../hooks/useCreateEventForm";
 import { createEventOptions } from "../../utils/forms/createEventOptions";
+import { getEventBackgroundColor } from "../../utils/colors/eventColorPicker";
 
 const CreateEvent = () => {
   const [qrCodeValue, setQrCodeValue] = useState(null);
@@ -27,6 +27,7 @@ const CreateEvent = () => {
   const createEvent = async (data) => {
     const eventRef = collection(firestore, eventCollection);
     try {
+      console.log(data.eventRecurrence);
       setQrCodeValue(null);
       setLoading("createEvent", true);
       const eventDoc = await addDoc(eventRef, {
@@ -36,8 +37,8 @@ const CreateEvent = () => {
         eventCategory: data.eventCategory,
         eventRecurrence: data.eventRecurrence,
         ...(data.groupLimit && { groupLimit: data.groupLimit }),
-        colorPicker: data.colorPicker,
         signedUp: [],
+        eventColor: getEventBackgroundColor(data.eventRecurrence),
       });
 
       if (!eventDoc.id) {

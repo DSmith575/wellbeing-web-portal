@@ -1,35 +1,34 @@
-import React from 'react';
+import React from "react";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { useController } from 'react-hook-form';
+} from "@/components/ui/select";
+import { useController } from "react-hook-form";
 
 const FormFieldWrapper = ({
   control,
   name,
   label,
-  type = 'text',
+  type = "text",
   placeholder,
   options = [],
 }) => {
   const { field } = useController({
     name,
     control,
-    defaultValue: '',
+    defaultValue: "",
   });
 
   return (
@@ -40,7 +39,7 @@ const FormFieldWrapper = ({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            {type === 'select' ? (
+            {type === "select" ? (
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger>
                   <SelectValue placeholder={placeholder} />

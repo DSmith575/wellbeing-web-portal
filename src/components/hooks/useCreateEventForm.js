@@ -13,7 +13,7 @@ const useCreateEventForm = () => {
       eventType: "",
       eventCategory: "",
       eventRecurrence: "",
-      colorPicker: "",
+      eventColor: [],
     },
   });
   return formMethods;
