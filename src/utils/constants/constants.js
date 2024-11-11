@@ -29,9 +29,9 @@ export const eventRecurrenceColors = {
 export const tableHeaders = [
   "Category",
   "Event Name",
-  "Event Date",
+  "Start Time",
+  "End Time",
   "Event Location",
-  "Sign-ups",
-  "Group Limit",
+  "Signups",
   "Recurrence",
 ];

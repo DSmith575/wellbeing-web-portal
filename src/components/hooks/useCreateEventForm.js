@@ -9,6 +9,7 @@ const useCreateEventForm = () => {
       eventName: "",
       groupLimit: "",
       eventDate: "",
+      eventEndDate: "",
       eventLocation: "",
       eventType: "",
       eventCategory: "",

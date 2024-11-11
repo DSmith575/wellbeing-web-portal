@@ -20,6 +20,9 @@ import QrCode from "../qrCode/QrCode";
 import Spinner from "../spinner/Spinner";
 import EventLegend from "./EventLegend";
 
+import { IoTrashBin } from "react-icons/io5";
+import { GoInfinity } from "react-icons/go";
+
 const EventList = () => {
   const { loading, setLoading } = useLoading();
   const event = useEventList();
@@ -28,7 +31,6 @@ const EventList = () => {
   const handleDeleteEvent = async (eventId) => {
     try {
       setLoading(`deleteEvent-${eventId}`, true);
-      await new Promise((resolve) => setTimeout(resolve, 4000));
       await deleteEvent(eventId);
     } catch (error) {
       console.error(error);
@@ -38,6 +40,7 @@ const EventList = () => {
   };
   return (
     <section className={"mx-8 my-8 w-full relative"}>
+      <EventLegend text={"Event ended"} />
       <section className={"rounded-lg shadow-lg w-full"}>
         <Table>
           {event && (
@@ -63,13 +66,20 @@ const EventList = () => {
                     <TableCell>
                       {convertEventDateToLocale(event.eventDate)}
                     </TableCell>
+                    <TableCell>
+                      {convertEventDateToLocale(event.eventDate)}
+                    </TableCell>
                     <TableCell>{event.eventLocation}</TableCell>
-                    <TableCell>{event.signedUp.length}</TableCell>
 
                     {!event.groupLimit ? (
-                      <TableCell>No Group Limit</TableCell>
+                      <TableCell className={"flex items-center"}>
+                        {event.signedUp.length} /
+                        <GoInfinity size={20} className={"ml-2"} />
+                      </TableCell>
                     ) : (
-                      <TableCell>{event.groupLimit}</TableCell>
+                      <TableCell>
+                        {event.signedUp.length} / {event.groupLimit}
+                      </TableCell>
                     )}
 
                     <TableCell>{event.eventRecurrence}</TableCell>
@@ -80,10 +90,10 @@ const EventList = () => {
                         {loading(`deleteEvent-${event.id}`) ? (
                           <Spinner />
                         ) : (
-                          "Delete"
+                          <IoTrashBin size={20} className={"text-white"} />
                         )}
                       </Button>
-                      <QrCode qrCodeValue={event} hideQr={true} />
+                      <QrCode qrCodeValue={event} hideQr={true} showQrIcon={true} />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -92,7 +102,6 @@ const EventList = () => {
           </TableBody>
         </Table>
       </section>
-      <EventLegend text={"Event ended"} />
     </section>
   );
 };

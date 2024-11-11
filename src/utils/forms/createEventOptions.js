@@ -14,6 +14,12 @@ export const createEventOptions = [
     placeholder: "Enter event date",
   },
   {
+    name: "eventEndDate",
+    label: "Event End Date",
+    type: "datetime-local",
+    placeholder: "Enter event end date",
+  },
+  {
     name: "eventLocation",
     label: "Event Location",
     placeholder: "Enter event location",

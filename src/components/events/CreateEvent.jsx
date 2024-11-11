@@ -33,6 +33,7 @@ const CreateEvent = () => {
       const eventDoc = await addDoc(eventRef, {
         eventName: data.eventName,
         eventDate: data.eventDate,
+        eventEndDate: data.eventEndDate,
         eventLocation: data.eventLocation,
         eventCategory: data.eventCategory,
         eventRecurrence: data.eventRecurrence,
