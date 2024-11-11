@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { RouterProvider } from 'react-router-dom';
-import router from './router/router';
-import { FirestoreAuthProvider } from './context/FirestoreAuthContext';
+import { RouterProvider } from "react-router-dom";
+import router from "./router/router";
+import { FirestoreAuthProvider } from "./context/FirestoreAuthContext";
 
 const App = () => {
   return (

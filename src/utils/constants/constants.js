@@ -25,3 +25,13 @@ export const eventRecurrenceColors = {
   oneOff: ["#bef264", "#fef9c3"],
   challenge: ["#c4b5fd", "#f9a8d4"],
 };
+
+export const tableHeaders = [
+  "Category",
+  "Event Name",
+  "Event Date",
+  "Event Location",
+  "Sign-ups",
+  "Group Limit",
+  "Recurrence",
+];

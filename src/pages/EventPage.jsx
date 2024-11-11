@@ -1,7 +1,7 @@
-import EventList from '../components/events/EventList';
-import { useUserAuth } from '../context/FirestoreAuthContext';
-import { useNavigate } from 'react-router-dom';
-import { routerPaths } from '../router/routeLabels';
+import EventList from "../components/events/EventList";
+import { useUserAuth } from "../context/FirestoreAuthContext";
+import { useNavigate } from "react-router-dom";
+import { routerPaths } from "../router/routeLabels";
 
 const EventPage = () => {
   const { user } = useUserAuth();
@@ -10,7 +10,11 @@ const EventPage = () => {
   if (!user) {
     navigate(routerPaths.home);
   }
-  return <EventList />;
+  return (
+    <section className={"flex justify-center items-center"}>
+      <EventList />
+    </section>
+  );
 };
 
 export default EventPage;
