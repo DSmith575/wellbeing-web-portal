@@ -58,7 +58,7 @@ const EventList = () => {
                 {event.map((event) => (
                   <TableRow
                     key={event.id}
-                    className={`${dateComparison(today, event.eventDate.toDate()) && "bg-gradient-to-tr from-red-200 to-white"}`}>
+                    className={`${dateComparison(today, event.eventEndDate.toDate()) && "bg-gradient-to-tr from-red-200 to-white"}`}>
                     <TableCell className={`font-medium`}>
                       {event.eventCategory}
                     </TableCell>
@@ -67,7 +67,7 @@ const EventList = () => {
                       {convertEventDateToLocale(event.eventDate)}
                     </TableCell>
                     <TableCell>
-                      {convertEventDateToLocale(event.eventDate)}
+                      {convertEventDateToLocale(event.eventEndDate)}
                     </TableCell>
                     <TableCell>{event.eventLocation}</TableCell>
 
