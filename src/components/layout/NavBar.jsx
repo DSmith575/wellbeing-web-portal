@@ -1,9 +1,16 @@
+/**
+ * @name NavBar
+ * @description NavBar component
+ * @returns {JSX.Element} - Rendered NavBar component
+
+ */
+
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
-} from '@/components/ui/navigation-menu';
-import MappedRoutes from '../../router/MappedRoutes';
+} from "@/components/ui/navigation-menu";
+import MappedRoutes from "../../router/MappedRoutes";
 
 const NavBar = () => {
   return (

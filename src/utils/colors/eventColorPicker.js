@@ -1,3 +1,10 @@
+/**
+ * @name eventColorPicker
+ * @description Event color picker
+ * @param {string} eventRecurrence - Event recurrence
+ * @returns {string} - Event background color
+ */
+
 import { eventRecurrenceColors } from "../constants/constants";
 
 export const getEventBackgroundColor = (eventRecurrence) => {

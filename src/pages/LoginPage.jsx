@@ -1,3 +1,9 @@
+/**
+ * @name LoginPage
+ * @description Login page
+ * @returns {JSX.Element} - Rendered Login page component
+ */
+
 import LoginForm from "../components/forms/LoginForm";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/FirestoreAuthContext";

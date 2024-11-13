@@ -1,10 +1,17 @@
-import { initializeApp } from 'firebase/app';
+/**
+ * @name firebase
+ * @description Firebase configuration
+ * @param {Object} firebaseConfig - Firebase configuration object
+ * @returns {Object} - Firebase configuration object
+ */
+
+import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   initializeFirestore,
   persistentLocalCache,
-} from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,

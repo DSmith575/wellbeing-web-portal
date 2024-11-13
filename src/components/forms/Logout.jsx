@@ -1,9 +1,16 @@
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useUserAuth } from '../../context/FirestoreAuthContext';
-import { routerPaths } from '../../router/routeLabels';
-import useLoading from '../hooks/useLoading';
-import Spinner from '../spinner/Spinner';
+/**
+ * @name Logout
+ * @description Logout component
+ * @param {Object} props - Component props
+ * @returns {JSX.Element} - Rendered Logout component
+ */
+
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../context/FirestoreAuthContext";
+import { routerPaths } from "../../router/routeLabels";
+import useLoading from "../../hooks/useLoading";
+import Spinner from "../spinner/Spinner";
 
 const Logout = ({ styles, children }) => {
   const { logout } = useUserAuth();
@@ -12,19 +19,19 @@ const Logout = ({ styles, children }) => {
 
   const handleClick = async () => {
     try {
-      setLoading('logout', true);
+      setLoading("logout", true);
       await logout();
       navigate(routerPaths.home);
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading('logout', false);
+      setLoading("logout", false);
     }
   };
 
   return (
     <NavLink to="/" onClick={handleClick} className={styles}>
-      {loading('logout') ? <Spinner /> : children}
+      {loading("logout") ? <Spinner /> : children}
     </NavLink>
   );
 };

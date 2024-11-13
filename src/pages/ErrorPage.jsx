@@ -1,6 +1,12 @@
-import { Link } from 'react-router-dom';
-import { TbError404 } from 'react-icons/tb';
-import { routerPaths } from '../router/routeLabels';
+/**
+ * @name ErrorPage
+ * @description Error page
+ * @returns {JSX.Element} - Rendered Error page component
+ */
+
+import { Link } from "react-router-dom";
+import { TbError404 } from "react-icons/tb";
+import { routerPaths } from "../router/routeLabels";
 
 const ErrorPage = () => {
   return (

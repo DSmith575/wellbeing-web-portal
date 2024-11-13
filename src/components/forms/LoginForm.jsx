@@ -1,13 +1,20 @@
-import { FormProvider } from 'react-hook-form';
-import FormFieldWrapper from './FormFieldWrapper';
-import { useUserAuth } from '../../context/FirestoreAuthContext';
-import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
-import { routerPaths } from '../../router/routeLabels';
-import useLoading from '../hooks/useLoading';
-import Spinner from '../spinner/Spinner';
-import { useState } from 'react';
-import useLoginForm from '../hooks/useLoginForm';
+/**
+ * @name LoginForm
+ * @description LoginForm component
+ * @returns {JSX.Element} - Rendered LoginForm component
+
+ */
+
+import { FormProvider } from "react-hook-form";
+import FormFieldWrapper from "./FormFieldWrapper";
+import { useUserAuth } from "../../context/FirestoreAuthContext";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { routerPaths } from "../../router/routeLabels";
+import useLoading from "../../hooks/useLoading";
+import Spinner from "../spinner/Spinner";
+import { useState } from "react";
+import useLoginForm from "../../hooks/useLoginForm";
 
 const LoginForm = () => {
   const { login } = useUserAuth();
@@ -20,7 +27,7 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      setLoading('login', true);
+      setLoading("login", true);
       setError(null);
       await login(data.email, data.password);
       navigate(routerPaths.dashboard);
@@ -28,7 +35,7 @@ const LoginForm = () => {
       console.error(error);
       setError(error.message);
     } finally {
-      setLoading('login', false);
+      setLoading("login", false);
     }
   };
 
@@ -53,9 +60,9 @@ const LoginForm = () => {
             autoComplete="current-password"
           />
           <Button
-            className={`bg-green-500 ${loading('login') ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            className={`bg-green-500 ${loading("login") ? "cursor-not-allowed" : "cursor-pointer"}`}
             type="submit">
-            {loading('login') ? <Spinner /> : 'Login'}
+            {loading("login") ? <Spinner /> : "Login"}
           </Button>
         </form>
       </FormProvider>

@@ -1,3 +1,8 @@
+/**
+ * @name eventCollection
+ * @description Event collection
+ */
+
 export const eventCollection = "events";
 
 export const eventCategories = [
@@ -35,3 +40,5 @@ export const tableHeaders = [
   "Signups",
   "Recurrence",
 ];
+
+export const attendanceTableHeaders = ["First Name", "Last Name"];

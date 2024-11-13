@@ -1,3 +1,10 @@
+/**
+ * @name CreateEvent
+ * @description CreateEvent component
+ * @returns {JSX.Element} - Rendered CreateEvent component
+
+ */
+
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { FormProvider } from "react-hook-form";
@@ -6,9 +13,9 @@ import { firestore } from "../../firebase/firebase";
 import { eventCollection } from "../../utils/constants/constants";
 import FormFieldWrapper from "../forms/FormFieldWrapper";
 import QrCode from "../qrCode/QrCode";
-import useLoading from "../hooks/useLoading";
+import useLoading from "../../hooks/useLoading";
 import Spinner from "../spinner/Spinner";
-import useCreateEventForm from "../hooks/useCreateEventForm";
+import useCreateEventForm from "../../hooks/useCreateEventForm";
 import { createEventOptions } from "../../utils/forms/createEventOptions";
 import { getEventBackgroundColor } from "../../utils/colors/eventColorPicker";
 

@@ -1,5 +1,11 @@
+/**
+ * @name useEventList
+ * @description Custom hook to fetch event list
+ * @returns {Array} - Event list
+ */
+
 import { useState, useEffect } from "react";
-import { getEventList } from "../../utils/firestore/firestoreFunctions";
+import { getEventList } from "../utils/firestore/firestoreFunctions";
 
 const useEventList = () => {
   const [event, setEvent] = useState([]);
@@ -9,13 +15,14 @@ const useEventList = () => {
       return getEventList({
         collectionName: "events",
         callback: (snapshot) => {
-          const updatedGameList = snapshot.docs
+          const updatedEventList = snapshot.docs
             .map((doc) => ({
               ...doc.data(),
               id: doc.id,
             }))
-            .sort((a, b) => b.eventDate - a.eventDate);
-          setEvent(updatedGameList);
+            .sort((a, b) => b.eventEndDate.seconds - a.eventEndDate.seconds);
+
+          setEvent(updatedEventList);
         },
       });
     } catch (error) {
@@ -25,7 +32,7 @@ const useEventList = () => {
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, []); // Empty dependency array ensures this runs once on component mount
 
   return event;
 };

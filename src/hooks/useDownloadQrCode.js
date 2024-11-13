@@ -1,15 +1,22 @@
-import { useRef } from 'react';
+/**
+ * @name useDownloadQRCode
+ * @description Custom hook to download qr code
+ * @param {String} qrCodeValue - Qr code value
+ * @returns {Object} - Object containing svgRef and downloadQRCode
+ */
+
+import { useRef } from "react";
 
 export const useDownloadQRCode = (qrCodeValue) => {
   const svgRef = useRef(null);
 
   const downloadQRCode = () => {
-    const svgElement = svgRef.current.querySelector('svg');
+    const svgElement = svgRef.current.querySelector("svg");
     const svgData = new XMLSerializer().serializeToString(svgElement);
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
     const img = new Image();
-    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(svgBlob);
 
     img.onload = () => {
@@ -18,8 +25,8 @@ export const useDownloadQRCode = (qrCodeValue) => {
 
       ctx.drawImage(img, 0, 0);
 
-      const pngFile = canvas.toDataURL('image/png');
-      const downloadLink = document.createElement('a');
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
       downloadLink.href = pngFile;
       downloadLink.download = `${qrCodeValue.eventName}-QRCode.png`;
       document.body.appendChild(downloadLink);

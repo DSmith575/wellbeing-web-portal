@@ -1,4 +1,12 @@
-import { routerLabels } from './routeLabels';
+/**
+ * @name filterRoutes
+ * @description Filter routes based on user authentication status
+ * @param {Array} routes - Array of routes
+ * @param {Object} user - User object
+ * @returns {Array} - Filtered routes
+ */
+
+import { routerLabels } from "./routeLabels";
 
 const ignoredRoutesAuthenticated = [routerLabels.login];
 

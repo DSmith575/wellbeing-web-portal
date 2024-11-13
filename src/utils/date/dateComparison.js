@@ -1,5 +1,11 @@
+/**
+ * @name dateComparison
+ * @description Date comparison
+ * @param {string} currentDate - Current date
+ * @param {string} eventDate - Event date
+ * @returns {boolean} - Comparison result
+ */
+
 export const dateComparison = (currentDate, eventDate) => {
-  console.log("current", currentDate);
-  console.log("event", eventDate);
   return currentDate > eventDate;
 };

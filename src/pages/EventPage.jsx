@@ -1,3 +1,9 @@
+/**
+ * @name EventPage
+ * @description Event page
+ * @returns {JSX.Element} - Rendered Event page component
+ */
+
 import EventList from "../components/events/EventList";
 import { useUserAuth } from "../context/FirestoreAuthContext";
 import { useNavigate } from "react-router-dom";

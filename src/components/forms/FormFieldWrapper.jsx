@@ -1,3 +1,11 @@
+/**
+ * @name FormFieldWrapper
+ * @description FormFieldWrapper component
+ * @param {Object} props - Component props
+ * @returns {JSX.Element} - Rendered FormFieldWrapper component
+
+ */
+
 import React from "react";
 import {
   FormControl,

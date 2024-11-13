@@ -1,10 +1,17 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+/**
+ * @name FirestoreAuthContext
+ * @description Firestore authentication context
+ * @param {Object} children - React component children
+ * @returns {JSX.Element} - Rendered FirestoreAuthContext component
+ */
+
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   signOut,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-} from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+} from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const FirestoreAuthContext = createContext();
 
@@ -13,7 +20,7 @@ const useUserAuth = () => {
 };
 
 const FirestoreAuthProvider = ({ children }) => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
 
   const logout = () => {
     return signOut(auth);
@@ -23,7 +30,7 @@ const FirestoreAuthProvider = ({ children }) => {
     try {
       return signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      throw new Error('Incorrect email or password');
+      throw new Error("Incorrect email or password");
     }
   };
 

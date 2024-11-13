@@ -1,7 +1,13 @@
-import { createBrowserRouter, Outlet } from 'react-router-dom';
-import Layout from '../components/layout/Layout';
-import { routes } from './routeList';
-import ErrorPage from '../pages/ErrorPage';
+/**
+ * @name router
+ * @description Router component
+ * @returns {JSX.Element} - Rendered Router component
+ */
+
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import Layout from "../components/layout/Layout";
+import { routes } from "./routeList";
+import ErrorPage from "../pages/ErrorPage";
 
 const AppLayout = () => {
   return (
